@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import * as Location from 'expo-location';
 import { Camera } from 'expo-camera';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -102,19 +103,19 @@ export default function App() {
 
   if (!appIsReady) {
     animation.current?.play();
-    return(
-    <View style={styles.animationContainer}>
-      <LottieView
-        autoPlay
-        ref={animation}
-        style={{
-          width: 300,
-          height: 300,
-          backgroundColor: 'transparent',
-        }}
-        source={require('./assets/CameraLoading.json')}
-      />
-    </View>
+    return (
+      <LinearGradient colors={['rgba(255,255,255,0.25)', 'rgba(0,0,0,0.85)']} style={styles.animationContainer}>
+        <LottieView
+          autoPlay
+          ref={animation}
+          style={{
+            width: 300,
+            height: 300,
+            backgroundColor: 'transparent',
+          }}
+          source={require('./assets/CameraLoading.json')}
+        />
+      </LinearGradient>
     );
   }
 
@@ -133,9 +134,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   animationContainer: {
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
   },
 });
+
